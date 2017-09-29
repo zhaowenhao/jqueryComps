@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../lib/jquery-3.1.1.js"></script>
+    <script src="./jquery.radio.js"></script>
+    <title>radio demo</title>
+    <link rel="stylesheet" href="./radio.css">
+    <script>
+        $(function() {
+            $('#component').radioGroup({
+                name: 'gender2',
+                value: 'male',
+                options: [
+                    {value: 'male', title: 'Male'},
+                    {value: 'female', title: 'Female'}
+                ]
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <!--<div class="radio-group">
+        <label class="radio">
+            <input type="radio" name="gender" value="male" checked>
+            <span class="radio-icon">Male</span>
+        </label>
+        <label class="radio">
+            <input type="radio" name="gender" value="female">
+            <span class="radio-icon">Female</span>
+        </label>
+    </div>-->
+
+    <div id="component">
+    </div>
+</body>
+
+</html>

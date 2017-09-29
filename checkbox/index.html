@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Checkbox Demo</title>
+    <link rel="stylesheet" href="./checkbox.css">
+    <script src="../lib/jquery-3.1.1.js"></script>
+    <script src="./jquery.checkbox.js"></script>
+    <style>
+        * {
+            margin: 0;
+        }
+    </style>
+    <script>
+        $(function() {
+            /**
+             * checkbox group的使用方法
+             *
+             */
+            $('#component').checkboxGroup({
+                name: 'fruit',
+                value: ['apple'],
+                options: [
+                    {value: 'apple', title: 'Apple'},
+                    {value: 'pear', title: 'Pear'},
+                    {value: 'banana', title: 'Banana'}
+                ]
+            });
+
+            /**
+             * checkbox的使用
+             * checkbox的参数的是一个函数，这个函数内部的this指向当前的dom元素，插件会根据这个函数的返回值做参数创建checkbox
+             *
+             */
+            $('.listItem').checkbox(function() {
+                return {
+                    name: 'fruit',
+                    value: 'fr' + $(this).data('id')
+                }
+            });
+        })
+    </script>
+</head>
+
+<body>
+    <!--<div class="checkbox-group">
+        <label class="checkbox">
+            <input type="checkbox" name="fruit" value="apple" checked/>
+            <span class="checkbox-icon">Apple</span>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="fruit" value="pear"/>
+            <span class="checkbox-icon">Pear</span>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="fruit" value="banana"/>
+            <span class="checkbox-icon">Banana</span>
+        </label>
+    </div>-->
+
+    <div id="component">
+    </div>
+
+    <div class="listItem" data-id="111"></div>
+    <div class="listItem" data-id="232"></div>
+    <div class="listItem" data-id="3243"></div>
+    <div class="listItem" data-id="4435"></div>
+    <div class="listItem" data-id="5234"></div>
+</body>
+
+</html>

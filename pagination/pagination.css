@@ -1,0 +1,103 @@
+.pagination {
+
+}
+.pagination-total {
+    float: left;
+    color: #666;
+    padding: 0px 10px;
+    line-height: 32px;
+}
+.pagination-total span:before {
+    content: "共";
+}
+.pagination-total span::after {
+    content: "条";
+}
+.pagination-list {
+    list-style: none;
+    float: left;
+}
+.pagination-list-item {
+    float: left;
+    margin-right: 6px;
+    user-select: none;
+}
+.pagination-list-item a {
+    display: block;
+    padding: 4px 9px;
+    color: #666;
+    line-height: 22px;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    cursor: pointer;
+}
+.pagination-list-item a:hover {
+    color: #333;
+    border: 1px solid #ccc;
+}
+.pagination-list-item a:active {
+    color: #333;
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+    box-shadow: 0 2px 2px #e6e6e6 inset;
+}
+.pagination-list-item.active a{
+    color: #31c27c;
+    border: 1px solid #fff;
+    background-color: #fff;
+    box-shadow: none;
+    cursor: auto;
+}
+
+.pagination-list-item button {
+    display: block;
+    line-height: 22px;
+    padding: 4px 10px;
+    color: #666;
+    border: 1px solid #ebebeb;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.pagination-list-item button:hover {
+    color: #333;
+    border: 1px solid #ccc;
+}
+.pagination-list-item button:active {
+    color: #333;
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+    box-shadow: 0 2px 2px #e6e6e6 inset;
+}
+
+.pagination-jumper {
+    float: left;
+    padding: 0px 10px;
+    color: #666;
+    line-height: 32px;
+}
+.pagination-jumper-input {
+    width: 40px;
+    height: 32px;
+    padding-left: 5px;
+    background-color: #fff;
+    border: 1px solid #ebebeb;
+    margin: 0 5px;
+}
+.pagination-jumper-input:hover {
+    border: 1px solid #ccc;
+}
+.pagination-jumper-btn {
+    padding: 8px 12px;
+    margin-left: 5px;
+    color: #31C27C;
+    background: #fff;
+    border: 1px solid #ebebeb;
+    cursor: pointer;
+}
+.pagination-jumper-btn:hover {
+    box-shadow: 0 -1px 0 #dcdcdc inset;
+}
+.pagination-jumper-btn:active {
+    box-shadow: 0 3px 3px #dcdcdc inset;
+}

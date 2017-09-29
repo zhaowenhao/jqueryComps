@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/jquery-3.1.1.js"></script>
+    <script src="./jquery.pagination.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            outline: none;
+        }
+        *,:after,:before {
+            box-sizing: border-box;
+        }
+        body {
+            padding: 50px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .clearfix {
+            zoom: 1;
+        }
+        .clearfix:before,
+        .clearfix:after {
+            content: " ";
+            display: table;
+        }
+        .clearfix:after {
+            clear: both;
+            visibility: hidden;
+            font-size: 0;
+            height: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="./pagination.css">
+    <script>
+        $(function() {
+            //注意：只有一页的时候不显示分页
+            $('#test').pagination({
+                pageNo: 3,
+                pageSize: 15,
+                totalCount: 887,
+                onChange: function(page) {
+                    console.log('current page:', page);
+                }
+            })
+        });
+        function changePage(num) {
+            $('#test').pagination({
+                pageNo: num,
+                totalCount: 777
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="component">
+        <!--<div class="pagination clearfix">
+            <input class="pagination-current" type="hidden" value="1"/>
+            <div class="pagination-total">
+                <span>102</span>
+            </div>
+            <ul class="pagination-list clearfix">
+                <li class="pagination-list-item"><button class="pagination-prev">&lt;</button></li>
+                <li class="pagination-list-item active"><a>1</a></li>
+                <li class="pagination-list-item"><a>2</a></li>
+                <li class="pagination-list-item"><a>3</a></li>
+                <li class="pagination-list-item"><a>4</a></li>
+                <li class="pagination-list-item"><a>5</a></li>
+                <li class="pagination-list-item"><a>6</a></li>
+                <li class="pagination-list-item"><a>7</a></li>
+                <li class="pagination-list-item"><a>8</a></li>
+                <li class="pagination-list-item"><div>...</div></li>
+                <li class="pagination-list-item"><a>99</a></li>
+                <li class="pagination-list-item"><button class="pagination-next">&gt;</button></li>
+            </ul>
+            <div class="pagination-jumper">
+                <span>跳转至</span><input class="pagination-jumper-input" type="text" value=""/><span>页</span>
+                <button class="pagination-jumper-btn">GO</button>
+            </div>
+        </div>-->
+    </div>
+    <div id="test"></div>
+    <button onclick="changePage(5);">从外部修改分页页码</button>
+</body>
+</html>

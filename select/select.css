@@ -1,0 +1,109 @@
+.select {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 32px;
+    width: 176px;
+    padding: 4px 8px;
+    line-height: 20px;
+    color: #666;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+.select:hover {
+    border-color: #ffba00;
+}
+.select.select-open {
+    border-color: #ffa800;
+}
+.select.select-open .select-arrow {
+    transform: rotate(180deg);
+}
+.select-text,.select-tip {
+    display: inline-block;
+    height: 22px;
+    white-space: nowrap;
+    width: 132px;
+    overflow: hidden;
+    line-height: 22px;
+    text-overflow: ellipsis;
+}
+.select-tip {
+    width: 97%;
+    color: #999;
+}
+.select-extra {
+    position: absolute;
+    right: 30px;
+}
+.select-arrow {
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    display: block;
+    width: 12px;
+    height: 12px;
+    transition: all .3s ease;
+}
+.select-arrow:before, .select-arrow:after {
+    position: absolute;
+    display: inline-block;
+    content: ' ';
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-top-color: #ccc;
+    top: 4px;
+    left: 0;
+}
+.select-arrow:after {
+    top: 3px;
+    border-top-color: #fff;
+}
+
+
+.select-options {
+    display: none;
+    padding-top: 8px;
+    position: absolute;
+    width: 176px;
+    max-height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 6px 0 #999;
+    border-radius: 2px;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+.select-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    width: 100%;
+    color: #666;
+}
+.select-menu-item {
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 20px;
+    padding: 6px 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.select-menu-item.select-menu-item-hover {
+    background: #f2f2f2;
+}
+
+.select-menu-item.select-menu-item-selected {
+    background: #f7f7f7;
+    font-weight: bold;
+}

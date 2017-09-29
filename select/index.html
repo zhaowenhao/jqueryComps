@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>select demo</title>
+    <link rel="stylesheet" href="./select.css">
+    <script src="../lib/jquery-3.1.1.js"></script>
+    <script src="./jquery.select.js"></script>
+    <script>
+        $(function() {
+            /**
+             * 基本用法
+             */
+            $('#component').select({
+                // name: 'province',
+                // width: 176,
+                // value: '021',
+                text: '选择一个省份',
+                extra: '省',
+                // popContainer: '#container',
+                options: [
+                    {value: '010', title: '北京'},
+                    {value: '021', title: '上海'},
+                    {value: '123', title: '河北'},
+                    {value: '134', title: '广东'},
+                    {value: '234', title: '江苏'},
+                    {value: '010', title: '北京'},
+                    {value: '021', title: '上海'},
+                    {value: '123', title: '河北'},
+                    {value: '134', title: '广东'},
+                    {value: '234', title: '江苏'},
+                    {value: '010', title: '北京'},
+                    {value: '021', title: '上海'},
+                    {value: '123', title: '河北'},
+                    {value: '134', title: '广东'},
+                    {value: '234', title: '江苏'}
+                ]
+            });
+
+            /**
+             * 当options是从后端直接拿的时候
+             */
+            var comp2Opts = $('#privenceOpts').text();
+            $('#comp2').select({
+                text: '选择省份',
+                options: JSON.parse(comp2Opts)
+            })
+        });
+    </script>
+</head>
+<body>
+    <div id="container" style="position: relative;margin: 100px;">
+        <div id="component"></div>
+        <div style="margin: 50px 0;">
+            <div id="comp2"></div>
+        </div>
+    </div>
+
+    <script id="privenceOpts" type="text/json">
+    [{"value":"010","title":"北京"},{"value":"021","title":"上海"},{"value":"123","title":"河北"},{"value":"134","title":"广东"},{"value":"234","title":"江苏"},{"value":"010","title":"北京"},{"value":"021","title":"上海"},{"value":"123","title":"河北"},{"value":"134","title":"广东"},{"value":"234","title":"江苏"},{"value":"010","title":"北京"},{"value":"021","title":"上海"},{"value":"123","title":"河北"},{"value":"134","title":"广东"},{"value":"234","title":"江苏"}]
+    </script>
+</body>
+</html>

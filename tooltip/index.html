@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tooltip demos</title>
+    <link rel="stylesheet" href="./tooltip.css"/>
+    <script src="../lib/jquery-3.1.1.js"></script>
+    <script src="./jquery.tooltip.js"></script>
+    <style>
+        #container {
+            margin: 20px;
+            font-size: 14px;
+        }
+        #component {
+            display: inline-block;
+            width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .list {
+            margin-top: 50px;
+        }
+        .list-item {
+            margin: 20px 0;
+            width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+    <script>
+        $(function() {
+            $('#component').tooltip(function() {
+                return {
+                    text: $(this).text()
+                }
+            });
+
+
+            $('.list-item').tooltip(function() {
+                return {
+                    text: $(this).text()
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="container">
+        <span id="component">提示文字内容提示文字内容提示文字内容提示文字内容提示文字内容提示文字内容</span>
+        <div class="list">
+            <div class="list-item">纯html，一个文件就是一个模板，直接转成字符串即可；</div>
+            <div class="list-item">需要有变量，一个文件有几个模板，每个模板对应一个变量</div>
+            <div class="list-item">再复杂一点，模板是require了其它的工厂模块生成的字符串</div>
+            <div class="list-item">oader加载器就是对各种非正常资源的解析，转化成浏览器可以识别的js/css文件等</div>
+            <div class="list-item">有一个就是在js里面写html的模板，会有点不太方便，一个是语法不是高亮的，第二个是需要双引号把每一行包起来</div>
+        </div>
+    </div>
+
+</body>
+</html>
