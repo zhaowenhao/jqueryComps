@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>表单验证DEMO</title>
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+    <script src="../lib/jquery-3.1.1.js"></script>
+    <script src="./jquery.validate.js"></script>
+    <script>
+        $(function () {
+            var emailExp = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            $('#account').validate({
+                expression: "return $(this).val() ? 0 : 1",
+                message1: "账号不能为空",
+                live: true
+            });
+            $('#password').validate({
+                expression: "return $(this).val() ? 0 : 1",
+                message1: "密码不能为空"
+            });
+            $('#password2').validate({
+                expression: function (options) {
+                    if (!$(this).val()) {
+                        return 1;
+                    }
+                    if ($(this).val() !== $('#password').val()) {
+                        return 2;
+                    }
+                    return 0;
+                },
+                message1: "密码不能为空",
+                message2: "密码不一致"
+            });
+            $('#email').validate({
+                mode: 2,
+                expression: function (options, callback) {
+                    var value = $(this).val();
+                    if (!value) {
+                        callback(1);
+                        return;
+                    }
+                    if (!emailExp.test(value)) {
+                        callback(2);
+                        return;
+                    }
+                    setTimeout(function () {//模拟异步验证，可以处理后端验证
+                        if (value.indexOf('test') > -1) { //模拟邮箱占用
+                            callback(3);
+                        } else {
+                            callback(0);
+                        }
+                    }, 200);
+                },
+                message1: "邮箱不能为空",
+                message2: "非法邮箱",
+                message3: "邮箱已被占用"
+            });
+            $('#education').validate({
+                mode: 3,
+                expression: function (options) {
+                    if ($(this).val() == 0) {
+                        return 1;
+                    }
+                    return 0;
+                },
+                message1: "学历不能为空"
+            });
+            $('#submit').click(function () {
+                $('#form').validated(function () {
+                    console.log("validate success!");
+                }, function () {
+                    console.log("validate failure!");
+                });
+            });
+            
+            //你还可以手动触发验证哦
+            $('#test').click(function() {
+                $('#account').trigger('validate');
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <h2>表单验证DEMO</h2>
+    <div id="form" class="box">
+        <div class="row">
+            <div class="label required">账号</div>
+            <div class="input">
+                <input id="account" name="account" placeholder="请填写账号" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="label required">密码</div>
+            <div class="input">
+                <input id="password" type="password" name="password" placeholder="请填写密码" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="label required">确认密码</div>
+            <div class="input">
+                <input id="password2" type="password" name="password2" placeholder="请再次确认密码" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="label required">邮箱</div>
+            <div class="input">
+                <input id="email" name="email" placeholder="包含test的邮箱已被占用" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="label required">学历</div>
+            <div class="input">
+                <select id="education" name="education">
+                    <option value="0">请选择</option>
+                    <option value="1">本科</option>
+                    <option value="2">大专</option>
+                    <option value="3">高中</option>
+                    <option value="3">其他</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input" style="text-align: center;">
+                <button id="submit">提交</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input" style="text-align: center;">
+                <button id="test">试试手动触发验证</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
