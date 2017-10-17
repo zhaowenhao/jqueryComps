@@ -53,7 +53,11 @@
             t = ['.', totalPage];
         }
 
-        pages = pages.concat(s).concat(p).concat(t);
+        if (t[0] < p[0]) {
+            pages = pages.concat(s).concat(t).concat(p);
+        } else {
+            pages = pages.concat(s).concat(p).concat(t);
+        }
 
         var tmp = 0;
         pages = pages.filter(function (page) {
