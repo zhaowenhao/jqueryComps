@@ -63,7 +63,7 @@
     function rename(node, options) {
         var title = $(node).find('.tree-node-title');
         var value = title.html();
-        title.after('<input class="tree-node-edit" value="' + value + '"/>');
+        title.after('<input class="tree-node-edit" data-old="' + value + '" value="' + value + '"/>');
         title.next().focus();
         title.remove();
     }
@@ -132,7 +132,6 @@
                             popContainer: node,
                             btns: ['新建子类目', '重命名', '上移', '下移', '删除'],
                             callback: function (btnIdx, btnText) {
-                                console.log(node, btnIdx, btnText, node.parent().next());
                                 switch (btnText) {
                                     case '新建子类目':
                                         addChild(node, options);
