@@ -1,0 +1,22 @@
+.dropdown {
+    display: none;
+    position: absolute;
+    z-index: 999;
+    font-size: 14px;
+    padding: 8px 0;
+    border: 1px solid #60c4a6;
+    background: #fff;
+    color: #666;
+    box-sizing: border-box;
+    box-shadow: 0 2px 6px 0 #ccc;
+}
+
+.dropdown-item {
+    line-height: 28px;
+    padding: 0 16px;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background: #f7f7f7;
+}

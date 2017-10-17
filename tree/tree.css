@@ -1,0 +1,119 @@
+.tree-root {
+
+}
+
+.tree-node {
+    position: relative;
+    line-height: 32px;
+    height: 32px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tree-node:hover {
+    background: #f7f7f7;
+}
+
+.tree-node.tree-node-active {
+    background: #eee;
+}
+
+.tree-level1 > .tree-node {
+    padding-left: 20px;
+}
+
+.tree-level2 > .tree-node {
+    padding-left: 40px;
+}
+
+.tree-level3 > .tree-node {
+    padding-left: 60px;
+}
+
+.tree-level4 > .tree-node {
+    padding-left: 80px;
+}
+
+.tree-level5 > .tree-node {
+    padding-left: 100px;
+}
+
+.tree-expand-icon {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    color: #666;
+    transition: all .2s ease;
+}
+
+.tree-expand-icon:before {
+    position: absolute;
+    content: ' ';
+    display: block;
+    left: 8px;
+    top: 4px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-left-color: inherit;
+}
+
+.tree-node-icon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 18px;
+    height: 18px;
+    background: url(http://img.dabanjia.com/category_state_0.svg) no-repeat center 0;
+}
+
+.tree-node-oper-icon {
+    display: none;
+    position: absolute;
+    right: 4px;
+    top: 2px;
+    width: 26px;
+    height: 26px;
+    background: url(http://60.205.57.136:8680/static/lib/mw-tree/images/btn_more.svg) no-repeat left 0;
+}
+
+.tree-node:hover .tree-node-oper-icon, .tree-node.tree-node-active .tree-node-oper-icon {
+    display: block;
+}
+
+.tree-node-edit {
+    width: 80px;
+    outline: none;
+}
+
+.tree-node .checkbox {
+    margin-right: -4px;
+    margin-left: -4px;
+    vertical-align: middle;
+    height: 32px;
+}
+
+.tree-hide {
+    display: none;
+}
+
+.tree-node.tree-node-expand .tree-expand-icon {
+    transform: rotate(90deg);
+}
+
+.tree-node.tree-node-no-check .checkbox {
+    display: none;
+}
+
+.tree-node.tree-node-no-icon .tree-node-icon {
+    display: none;
+}
+
+.tree-node.tree-node-no-oper .tree-node-oper-icon {
+    display: none!important;
+}
+
+.tree-node.tree-node-no-child .tree-expand-icon {
+    visibility: hidden;
+}

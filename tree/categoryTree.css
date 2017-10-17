@@ -1,0 +1,25 @@
+.category-tree .tree-node-icon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 18px;
+    height: 18px;
+    background: url(http://img.dabanjia.com/category_state_0.svg) no-repeat center 0;
+}
+
+.category-tree .tree-node-oper-icon {
+    display: none;
+    position: absolute;
+    right: 4px;
+    top: 2px;
+    width: 26px;
+    height: 26px;
+    background: url(http://60.205.57.136:8680/static/lib/mw-tree/images/btn_more.svg) no-repeat left 0;
+}
+
+.category-tree .tree-children>:first-child>.tree-node .dropdown .dropdown-item:nth-child(3) {
+    display: none;
+}
+
+.category-tree .tree-children>:last-child>.tree-node .dropdown .dropdown-item:nth-child(4) {
+    display: none;
+}

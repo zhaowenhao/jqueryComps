@@ -1,7 +1,7 @@
 /**
- * jquery tooltip 组件
+ * jquery dropdown 组件
  *
- * @file jquery.tooltip.js
+ * @file jquery.dropdown.js
  * @version 1.0.0
  * @license MIT
  * @author zhaowenhao
@@ -14,20 +14,6 @@
         hideTimeout = null,
         lastUUID = '';
 
-    function htmlEncode2(str) {
-        if (!str) {
-            return '';
-        }
-        return str.replace(/[<>]/g, function (input, idx) {
-            switch (input) {
-                case '<':
-                    return '&lt;';
-                case '>':
-                    return '&gt;';
-            }
-        });
-    }
-
     function generateUUID() {
         var uuid = '';
         for (var i = 0; i < 8; i++) {
@@ -36,17 +22,21 @@
         return uuid;
     }
 
-    function getTooltip(uuid, text, placement) {
-        var selectOptions = [
-            '<div class="tooltip" id="TOOLTIP-', uuid, '">',
-            '   <span class="tooltip-text">', text, '</span>',
-            '   <i class="tooltip-arrow"></i>',
+    function getTooltip(uuid, options) {
+        var btns = options.btns || [];
+        var items = btns.map(function (btnText, btnIdx) {
+            return '<div class="dropdown-item" data-dropdown-idx="' + btnIdx + '">' + btnText + '</div>';
+        })
+        var popContent = [
+            '<div class="dropdown" id="TOOLTIP-', uuid, '">',
+            '   ', items.join(''),
             '</div>'
         ];
-        return selectOptions.join('');
+        return popContent.join('');
     }
 
     function setTooltipListener(uuid, options) {
+        var callback = options.callback || function () { };
         $('#TOOLTIP-' + uuid + ',#' + uuid).on('mouseover', function () {
             clearAllTimeouts();
             if (lastUUID && lastUUID !== uuid) {
@@ -57,15 +47,20 @@
                 $('#TOOLTIP-' + uuid).show();
                 lastUUID = uuid;
                 showTimeout = null;
-            }, 500);
+            }, 200);
         });
         $('#TOOLTIP-' + uuid + ',#' + uuid).on('mouseout', function () {
             clearAllTimeouts();
             hideTimeout = setTimeout(function () {
                 $('#TOOLTIP-' + uuid).hide();
                 hideTimeout = null;
-            }, 500);
+            }, 200);
         })
+        $('#TOOLTIP-' + uuid).on('click', '.dropdown-item', function (e) {
+            callback(+$(this).data('dropdown-idx'), $(this).html(), $(this));
+            clearAllTimeouts();
+            $(this).parent().hide();
+        });
     }
 
     function clearAllTimeouts() {
@@ -88,10 +83,22 @@
         var tooltip = $('#TOOLTIP-' + uuid);
         var leftOffset = options.leftOffset || 0;
         var topOffset = options.topOffset || 0;
-        var cssObj = {
-            left: tx + leftOffset,
-            top: ty + th + 16 + topOffset
-        };
+        var popContainer = options.popContainer || '';
+        var cssObj;
+        if (popContainer && $(popContainer)[0]) {
+            var pOffset = $(popContainer).offset();
+            var pScrollTop = $(popContainer).scrollTop();
+            var pHeight = $(popContainer).height();
+            cssObj = {
+                left: tx - pOffset.left + leftOffset,
+                top: ty - pOffset.top + pScrollTop + pHeight + topOffset
+            }
+        } else {
+            cssObj = {
+                left: tx + leftOffset,
+                top: ty + th + topOffset
+            }
+        }
         if (options.width) {
             cssObj.width = options.width;
         }
@@ -99,20 +106,22 @@
     }
 
     $.fn.extend({
-        "tooltip": function (callback) {
+        "dropdown": function (callback) {
             assert(typeof callback === 'function', "tooltip组件的参数是一个函数");
             this.each(function () {
-                var options = callback.call(this);
-                var text = htmlEncode2(options.text),
-                    placement = options.placement || 'left',
-                    uuid = 'TOOLTIPTEXT-' + generateUUID();
+                var uuid = 'TOOLTIPTEXT-' + generateUUID();
                 if ($(this).attr('id')) {
                     uuid = $(this).attr('id');
                 } else {
                     $(this).attr('id', uuid);
                 }
-                var html = getTooltip(uuid, text, placement);
-                $(document.body).append(html);
+                var options = callback.call(this, uuid);
+                var html = getTooltip(uuid, options);
+                if (options.popContainer && $(options.popContainer)[0]) {
+                    $(options.popContainer).append(html);
+                } else {
+                    $(document.body).append(html);
+                }
                 $('#TOOLTIP-' + uuid).hide();
                 setTooltipListener(uuid, options);
             });

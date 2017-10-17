@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tree Demo</title>
+    <style>
+    * {
+        box-sizing: border-box;
+    }
+    </style>
+    <link rel="stylesheet" href="../checkbox/checkbox.css">
+    <link rel="stylesheet" href="./tree.css">
+    <link rel="stylesheet" href="./categoryTree.css">
+    <script src="../lib/jquery-3.1.1.js"></script>
+    <script src="../dropdown/jquery.dropdown.js"></script>
+    <link rel="stylesheet" href="./../dropdown/dropdown.css">
+    <script src="./jquery.tree.js"></script>
+    <script src="./jquery.categoryTree.js"></script>
+    <script>
+        function initCategory(nodes) {
+            $('#category').categoryTree({
+                nodes: nodes,
+                selectedNode: {id: "111"},
+                onNodeEdit: function(node, value, oldValue) {
+                    console.log('node-edit', node, value, oldValue);
+                },
+                onNodeAdd: function(node, value) {
+                    console.log('node-add', node, value);
+                    setTimeout(function() {//模拟后端请求
+                        nodes.push({name: value});
+                        initCategory(nodes);    //重新加载树
+                    }, 100);
+                }
+            })
+        }
+        $(function() {
+            var nodes = [
+                    {
+                        name: 1,
+                        editEnable: false,
+                        children: [
+                            {
+                                id: "11",
+                                name: '1_1<img>',
+                                children: [
+                                    {name: '1_1_1', id:"111"},
+                                    {name: '1_1_2'}
+                                ]
+                            },
+                            {name: '1_2'},
+                            {name: '1_3'},
+                        ]
+                    },
+                    {
+                        name: 2,
+                        children: [
+                            {name: '2_1'},
+                            {name: '2_2'},
+                            {name: '2_3'},
+                        ]
+                    }
+                ];
+            $('#component').tree({
+                checkEnable: true,
+                showIcon: true,
+                treeSkin: 'my-tree',
+                editEnable: false,
+                onNodeClick: function(node, tree) {
+                    console.log('node-click',node, tree, $(node).data('node'));
+                },
+                onNodeExpand: function(node, tree, open) {
+                    console.log('node-expand', node, tree, open)
+                },
+                onNodeCheck: function(node, tree, checked) {
+                    console.log('node-check', node, tree, checked);
+                },
+                nodes: nodes
+            });
+
+            initCategory(nodes);
+        });
+    </script>
+</head>
+<body>
+    <div id="component"></div>
+    <div id="category"></div>
+</body>
+</html>
